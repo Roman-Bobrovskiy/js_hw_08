@@ -42,4 +42,8 @@ function keys(event) {
     window.removeEventListener("keydown", keys);
     closeOverlay.removeEventListener("click", closeModalWindow);
   }
+  if (event.code === "ArrowRight") {
+  }
+  if (event.code === "ArrowLeft") {
+  }
 }
