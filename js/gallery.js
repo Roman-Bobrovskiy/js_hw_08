@@ -5,6 +5,7 @@ let modalImg = document.querySelector(".lightbox__image");
 let closeWindow = document.querySelector(".lightbox__button");
 let closeOverlay = document.querySelector(".lightbox__overlay");
 
+let imgarr = [];
 gallery.forEach(({ preview, description, original }) => {
   let li = document.querySelector(".gallery");
   li.insertAdjacentHTML(
@@ -15,7 +16,9 @@ gallery.forEach(({ preview, description, original }) => {
     </a>
   </li>`
   );
+  imgarr.push(original);
 });
+// console.log(imgarr);
 
 previewGallery.addEventListener("click", openModalWindow);
 closeWindow.addEventListener("click", closeModalWindow);
@@ -35,7 +38,7 @@ function closeModalWindow(event) {
   window.removeEventListener("keydown", keys);
   closeOverlay.removeEventListener("click", closeModalWindow);
 }
-
+let index = 0;
 function keys(event) {
   if (event.code === "Escape") {
     modalWindow.classList.remove("is-open");
@@ -43,7 +46,20 @@ function keys(event) {
     closeOverlay.removeEventListener("click", closeModalWindow);
   }
   if (event.code === "ArrowRight") {
+    // console.log(imgarr);
+    index -= 1;
+    if (index < 0) {
+      index = imgarr.length - 1;
+    }
+    // console.log(index);
+    modalImg.src = imgarr[index];
   }
   if (event.code === "ArrowLeft") {
+    // console.log(index);
+    index += 1;
+    if (index >= imgarr.length) {
+      index = 0;
+    }
+    modalImg.src = imgarr[index];
   }
 }
